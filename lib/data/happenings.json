@@ -1,0 +1,17 @@
+[
+  {
+    "title": "New Consultant Joining",
+    "description": "Dr. Anjali Sharma (Dermatologist) is now available every Monday and Friday.",
+    "tag": "Update"
+  },
+  {
+    "title": "Free Eye Checkup Camp",
+    "description": "Join us for a free eye screening on July 2nd. Open to all.",
+    "tag": "Event"
+  },
+  {
+    "title": "New Lab Services",
+    "description": "We've added advanced diagnostic testing to our in-house lab.",
+    "tag": "Service"
+  }
+]

@@ -6,47 +6,15 @@ import Link from "next/link"
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center">
-              <Heart className="h-8 w-8 text-blue-600 mr-2" />
-              <span className="text-xl font-bold text-gray-900">Cure All Polyclinic</span>
-            </Link>
-            <div className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-blue-600">
-                Home
-              </Link>
-              <Link href="/about" className="text-gray-700 hover:text-blue-600">
-                About
-              </Link>
-              <Link href="/services" className="text-gray-700 hover:text-blue-600">
-                Services
-              </Link>
-              <Link href="/doctors" className="text-gray-700 hover:text-blue-600">
-                Doctors
-              </Link>
-              <Link href="/contact" className="text-gray-900 hover:text-blue-600">
-                Contact
-              </Link>
-            </div>
-            <Button className="bg-blue-600 hover:bg-blue-700">
-              <Link href="/appointment">Book Appointment</Link>
-            </Button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+            {/* Hero Section */}
+      <section className="bg-blue-50 text-black py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl text-black max-w-3xl mx-auto">
             Get in touch with our team. We're here to help with your healthcare needs and answer any questions you may
             have.
           </p>
-        </div>
+        </div>  
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -65,11 +33,11 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Main Location</h3>
                     <p className="text-gray-600">
-                      123 Healthcare Avenue
+                      Shop no.2, Esctasy Business Park
                       <br />
-                      Medical District
+                      JSD road, Mulund West
                       <br />
-                      City, State 12345
+                      Mumbai, Maharashtra 400080
                     </p>
                   </div>
                   <div className="flex items-center space-x-4">
@@ -99,10 +67,10 @@ export default function ContactPage() {
                     <h3 className="font-semibold text-gray-900 mb-2">Phone Numbers</h3>
                     <div className="space-y-2">
                       <p className="text-gray-600">
-                        <strong>Main Office:</strong> (555) 123-4567
+                        <strong>Main Office:</strong> 7715080503
                       </p>
                       <p className="text-gray-600">
-                        <strong>Appointments:</strong> (555) 123-APPT
+                        <strong>Appointments:</strong> 7715080504
                       </p>
                     </div>
                   </div>
@@ -153,7 +121,7 @@ export default function ContactPage() {
                   <div>
                     <h4 className="font-semibold text-gray-900">Parking</h4>
                     <p className="text-gray-600 text-sm">
-                      Free parking available in our covered garage with elevator access
+                      Free parking available in the Ecstasy Business Park parking lot with access to the clinic via elevators.
                     </p>
                   </div>
                   <div>

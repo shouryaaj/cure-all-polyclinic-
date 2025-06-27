@@ -34,43 +34,11 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center">
-              <Heart className="h-8 w-8 text-blue-600 mr-2" />
-              <span className="text-xl font-bold text-gray-900">Cure All Polyclinic</span>
-            </Link>
-            <div className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-blue-600">
-                Home
-              </Link>
-              <Link href="/about" className="text-gray-900 hover:text-blue-600">
-                About
-              </Link>
-              <Link href="/services" className="text-gray-700 hover:text-blue-600">
-                Services
-              </Link>
-              <Link href="/doctors" className="text-gray-700 hover:text-blue-600">
-                Doctors
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-blue-600">
-                Contact
-              </Link>
-            </div>
-            <Button className="bg-blue-600 hover:bg-blue-700">
-              <Link href="/appointment">Book Appointment</Link>
-            </Button>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+      <section className="bg-blue-50 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">About Cure All Polyclinic</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <h1 className="text-4xl md:text-5xl text-black font-bold mb-6">About Cure All Polyclinic</h1>
+          <p className="text-xl text-black max-w-3xl mx-auto">
             For over 15 years, we've been committed to providing exceptional healthcare services to our community with
             compassion, expertise, and innovation.
           </p>
@@ -151,15 +119,15 @@ export default function AboutPage() {
       </section>
 
       {/* Mission Statement */}
-      <section className="py-16 bg-blue-600 text-white">
+      <section className="py-16 bg-blue-50 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">Our Mission</h2>
-          <p className="text-xl leading-relaxed mb-8">
+          <h2 className="text-3xl md:text-4xl text-black font-bold mb-8">Our Mission</h2>
+          <p className="text-xl text-black leading-relaxed mb-8">
             "To provide exceptional, compassionate healthcare services that improve the health and wellbeing of our
             community. We are committed to delivering personalized care with the highest standards of medical
             excellence, innovation, and patient safety."
           </p>
-          <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+          <Button size="lg" className="bg-black text-white hover:bg-gray-800">
             <Link href="/appointment">Experience Our Care</Link>
           </Button>
         </div>

@@ -5,7 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Calendar, Clock, User, Phone, Mail, Heart } from "lucide-react"
+import { Calendar, Clock, User, Phone, Mail, Heart, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 
 interface Doctor {
@@ -103,22 +103,17 @@ export default function AppointmentPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center">
-              <Heart className="h-8 w-8 text-blue-600 mr-2" />
-              <span className="text-xl font-bold text-gray-900">Cure All Polyclinic</span>
-            </Link>
-            <Link href="/" className="text-blue-600 hover:text-blue-800">
-              ← Back to Home
-            </Link>
-          </div>
-        </div>
-      </nav>
-
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Back to Home Button */}
+        <div className="mb-6">
+          <Link href="/">
+            <Button variant="outline" className="flex items-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Home
+            </Button>
+          </Link>
+        </div>
+
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Book Your Appointment</h1>
           <p className="text-xl text-gray-600">Schedule your visit with our experienced medical professionals</p>
@@ -259,7 +254,7 @@ export default function AppointmentPage() {
                   {isSubmitting ? "Submitting..." : "Request Appointment"}
                 </Button>
                 <Button type="button" variant="outline" className="flex-1">
-                  Call to Schedule: (555) 123-4567
+                  Call to Schedule: 7715080503
                 </Button>
               </div>
             </form>

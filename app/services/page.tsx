@@ -6,8 +6,15 @@ import { Heart } from "lucide-react"
 import Link from "next/link"
 import { useState, useEffect } from "react"
 
+interface Service {
+  title: string
+  description: string
+  icon: React.ReactNode
+  features: string[]
+}
+
 export default function ServicesPage() {
-  const [services, setServices] = useState([])
+  const [services, setServices] = useState<Service[]>([])
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -24,43 +31,11 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center">
-              <Heart className="h-8 w-8 text-blue-600 mr-2" />
-              <span className="text-xl font-bold text-gray-900">Cure All Polyclinic</span>
-            </Link>
-            <div className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-blue-600">
-                Home
-              </Link>
-              <Link href="/about" className="text-gray-700 hover:text-blue-600">
-                About
-              </Link>
-              <Link href="/services" className="text-gray-900 hover:text-blue-600">
-                Services
-              </Link>
-              <Link href="/doctors" className="text-gray-700 hover:text-blue-600">
-                Doctors
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-blue-600">
-                Contact
-              </Link>
-            </div>
-            <Button className="bg-blue-600 hover:bg-blue-700">
-              <Link href="/appointment">Book Appointment</Link>
-            </Button>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+      <section className="bg-blue-50 text-black py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Medical Services</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl text-black max-w-3xl mx-auto">
             Comprehensive healthcare services delivered by experienced professionals using state-of-the-art medical
             equipment and facilities.
           </p>
