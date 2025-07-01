@@ -3,7 +3,16 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Heart, Users, Stethoscope, FileText, Plus, Edit, Trash2, LogOut } from "lucide-react"
+import {
+  Heart,
+  Users,
+  Stethoscope,
+  FileText,
+  Plus,
+  Edit,
+  Trash2,
+  LogOut,
+} from "lucide-react"
 import { useRouter } from "next/navigation"
 
 export default function AdminDashboard() {
@@ -14,14 +23,12 @@ export default function AdminDashboard() {
   const router = useRouter()
 
   useEffect(() => {
-    // Check if user is authenticated
     const token = localStorage.getItem("adminToken")
     if (!token) {
       router.push("/admin/login")
       return
     }
 
-    // Fetch data based on active section
     fetchData()
   }, [activeSection, router])
 
@@ -72,7 +79,7 @@ export default function AdminDashboard() {
       const response = await fetch(endpoint, { method: "DELETE" })
 
       if (response.ok) {
-        fetchData() // Refresh data
+        fetchData()
       } else {
         alert("Error deleting item")
       }
@@ -83,25 +90,14 @@ export default function AdminDashboard() {
   }
 
   const renderContent = () => {
-    let data = []
-    switch (activeSection) {
-      case "doctors":
-        data = doctors
-        break
-      case "services":
-        data = services
-        break
-      case "content":
-        data = content
-        break
-    }
+    const data = activeSection === "doctors" ? doctors : activeSection === "services" ? services : content
 
     return (
       <div className="space-y-4">
         {data.map((item: any) => (
           <Card key={item.id} className="hover:shadow-md transition-shadow">
             <CardContent className="p-4">
-              <div className="flex justify-between items-start">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
                 <div className="flex-1">
                   <h3 className="font-semibold text-lg mb-2">{item.name || item.title}</h3>
                   <p className="text-gray-600 text-sm mb-2">
@@ -120,14 +116,8 @@ export default function AdminDashboard() {
                     </p>
                   )}
                 </div>
-                <div className="flex space-x-2 ml-4">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      /* Handle edit */
-                    }}
-                  >
+                <div className="flex space-x-2 mt-4 sm:mt-0 sm:ml-4">
+                  <Button variant="outline" size="sm">
                     <Edit className="h-4 w-4" />
                   </Button>
                   <Button
@@ -149,23 +139,16 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <Heart className="h-8 w-8 text-blue-600 mr-2" />
-              <span className="text-xl font-bold text-gray-900">Admin Dashboard</span>
-            </div>
-            <Button variant="outline" onClick={handleLogout} className="text-red-600 hover:text-red-700">
-              <LogOut className="h-4 w-4 mr-2" />
-              Logout
-            </Button>
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+        {/* Header on small screens */}
+        <div className="flex justify-between items-center lg:hidden">
+          <h1 className="text-xl font-bold text-gray-800">Admin Dashboard</h1>
+          <Button variant="outline" size="sm" onClick={handleLogout}>
+            <LogOut className="w-4 h-4 mr-2" />
+            Logout
+          </Button>
         </div>
-      </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar */}
           <div className="lg:col-span-1">
@@ -198,13 +181,21 @@ export default function AdminDashboard() {
                   <FileText className="h-4 w-4 mr-2" />
                   Articles & Vlogs
                 </Button>
+                <Button
+                  variant="destructive"
+                  className="w-full justify-start mt-4"
+                  onClick={handleLogout}
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </Button>
               </CardContent>
             </Card>
           </div>
 
           {/* Main Content */}
           <div className="lg:col-span-3">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
               <h1 className="text-2xl font-bold text-gray-900 capitalize">Manage {activeSection}</h1>
               <Button className="bg-blue-600 hover:bg-blue-700">
                 <Plus className="h-4 w-4 mr-2" />

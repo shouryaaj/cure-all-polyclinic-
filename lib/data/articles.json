@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "title": "Understanding Heart Health: Prevention and Care",
+    "content": "Heart disease remains one of the leading causes of death worldwide, but many cases are preventable through lifestyle changes and early detection. In this comprehensive guide, we'll explore the fundamentals of cardiovascular health, risk factors, and practical steps you can take to maintain a healthy heart throughout your life.\n\nThe heart is a remarkable organ that beats approximately 100,000 times per day, pumping blood throughout your body to deliver oxygen and nutrients to every cell. Understanding how your heart works and what it needs to function optimally is the first step toward better cardiovascular health.\n\nRisk factors for heart disease include both controllable and uncontrollable elements. While you cannot change factors like age, gender, and family history, you have significant control over lifestyle factors such as diet, exercise, smoking, and stress management.",
+    "date": "2024-06-01",
+    "type": "article"
+  },
+  {
+    "id": "2",
+    "title": "Nutrition Myths Debunked by Doctors",
+    "content": "With so much information online, it's hard to separate fact from fiction when it comes to food. In this article, we tackle the most common nutrition myths and explain what science actually says about them.\n\nFrom the truth about carbs to whether fat-free products are really healthier, we provide evidence-based answers you can trust. Learn how to read labels better and how to build a diet that's good for your body and sustainable in the long term.",
+    "date": "2024-05-20",
+    "type": "article"
+  },
+  {
+    "id": "3",
+    "title": "Sleep and Your Immune System: The Hidden Connection",
+    "content": "Recent studies show that getting enough quality sleep each night can directly impact your immune system’s strength and resilience. But how much is enough?\n\nWe explore how your body uses rest to repair and defend itself, and how sleep deprivation can weaken your response to infections. Plus, get our expert-approved tips for improving your sleep hygiene naturally.",
+    "date": "2024-05-10",
+    "type": "article"
+  },
+  {
+    "id": "4",
+    "title": "How to Build a Heart-Healthy Exercise Routine",
+    "content": "Cardiovascular exercise is one of the best ways to maintain heart health, manage weight, and reduce your risk of chronic disease. But what kind of routine is right for you?\n\nWe break down the best activities for heart health—like brisk walking, swimming, and cycling—and explain how often and how long you should aim to work out each week.",
+    "date": "2024-04-25",
+    "type": "article"
+  },
+  {
+    "id": "5",
+    "title": "Coping with Stress: Mental Health Tips for Busy Lives",
+    "content": "In a fast-paced world, stress is inevitable—but it doesn’t have to control your life. This article explores healthy coping mechanisms to manage anxiety, burnout, and emotional exhaustion.\n\nFrom breathing techniques and journaling to when to seek professional help, this guide offers practical tools for staying mentally resilient and emotionally balanced.",
+    "date": "2024-04-10",
+    "type": "article"
+  }
+]

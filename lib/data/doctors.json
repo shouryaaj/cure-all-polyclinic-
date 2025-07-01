@@ -1,0 +1,72 @@
+[
+  {
+    "id": "dr-jane-smith",
+    "name": "Dr. Jane Smith",
+    "specialty": "Cardiologist",
+    "image": "/images/doctors/jane-smith.jpg",
+    "experience": "10 years",
+    "education": "MD, Harvard Medical School",
+    "certifications": [
+      "Board Certified in Cardiology",
+      "ACLS Certification"
+    ],
+    "languages": [
+      "English",
+      "Spanish"
+    ],
+    "bio": "Dr. Jane Smith specializes in cardiovascular diseases with a compassionate and evidence-based approach."
+  },
+  {
+    "id": "dr-amir-khan",
+    "name": "Dr. Amir Khan",
+    "specialty": "Orthopedic Surgeon",
+    "image": "/images/doctors/amir-khan.jpg",
+    "experience": "15 years",
+    "education": "MS Ortho, AIIMS Delhi",
+    "certifications": [
+      "Orthopedic Trauma Fellowship",
+      "AO Spine Certification"
+    ],
+    "languages": [
+      "English",
+      "Hindi",
+      "Arabic"
+    ],
+    "bio": "Renowned for his surgical precision and patient outcomes in joint and trauma surgery."
+  },
+  {
+    "id": "dr-meera-patel",
+    "name": "Dr. Meera Patel",
+    "specialty": "Pediatrician",
+    "image": "/images/doctors/meera-patel.jpg",
+    "experience": "8 years",
+    "education": "MBBS, DCH, Mumbai University",
+    "certifications": [
+      "Pediatric Advanced Life Support (PALS)",
+      "Neonatal Resuscitation Program (NRP)"
+    ],
+    "languages": [
+      "English",
+      "Gujarati",
+      "Hindi"
+    ],
+    "bio": "Dr. Meera Patel provides warm and child-friendly care with expertise in childhood diseases and growth monitoring."
+  },
+  {
+    "id": "dr-rajesh-verma",
+    "name": "Dr. Rajesh Verma",
+    "specialty": "Dermatologist",
+    "image": "/images/doctors/rajesh-verma.jpg",
+    "experience": "12 years",
+    "education": "MD Dermatology, PGI Chandigarh",
+    "certifications": [
+      "Laser & Aesthetic Dermatology Certification",
+      "International Congress of Dermatology Membership"
+    ],
+    "languages": [
+      "English",
+      "Hindi"
+    ],
+    "bio": "Expert in treating skin, hair, and nail disorders with a focus on cosmetic dermatology and laser treatments."
+  }
+] 

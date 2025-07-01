@@ -1,63 +1,64 @@
-"use client"
+'use client'
 
+import React, { JSX } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Heart } from "lucide-react"
-import Link from "next/link"
-import { useState, useEffect } from "react"
+import {
+  Heart,
+  Stethoscope,
+  Syringe,
+  Brain,
+  Microscope,
+  XCircle
+} from "lucide-react"
+
+import services from "@/lib/data/services.json" // ← 🔥 Direct JSON import
 
 interface Service {
   title: string
   description: string
-  icon: React.ReactNode
+  icon: string
   features: string[]
 }
 
+const iconMap: Record<string, JSX.Element> = {
+  heart: <Heart className="text-blue-600" />,
+  stethoscope: <Stethoscope className="text-blue-600" />,
+  syringe: <Syringe className="text-blue-600" />,
+  brain: <Brain className="text-blue-600" />,
+  microscope: <Microscope className="text-blue-600" />
+}
+
 export default function ServicesPage() {
-  const [services, setServices] = useState<Service[]>([])
-
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const response = await fetch("/api/services")
-        const servicesData = await response.json()
-        setServices(servicesData)
-      } catch (error) {
-        console.error("Error fetching services:", error)
-      }
-    }
-    fetchServices()
-  }, [])
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-blue-50 text-black py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="bg-blue-50 text-black py-16 px-4">
+        <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Medical Services</h1>
-          <p className="text-xl text-black max-w-3xl mx-auto">
-            Comprehensive healthcare services delivered by experienced professionals using state-of-the-art medical
-            equipment and facilities.
+          <p className="text-lg md:text-xl max-w-3xl mx-auto">
+            Comprehensive healthcare services delivered by experienced professionals using modern medical equipment and compassionate care.
           </p>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <section className="py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow h-full">
+              <Card key={index} className="hover:shadow-lg transition-shadow h-full flex flex-col justify-between">
                 <CardHeader>
                   <div className="flex items-center mb-4">
-                    {service.icon}
-                    <CardTitle className="ml-4 text-xl">{service.title}</CardTitle>
+                    <div className="w-8 h-8">{iconMap[service.icon] || <XCircle className="text-red-500" />}</div>
+                    <CardTitle className="ml-4 text-xl font-semibold">{service.title}</CardTitle>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex flex-col flex-grow justify-between">
                   <p className="text-gray-600 mb-6">{service.description}</p>
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-gray-900">Services Include:</h4>
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-gray-900 mb-2">Services Include:</h4>
                     <ul className="space-y-1">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="text-sm text-gray-600 flex items-center">
@@ -67,7 +68,7 @@ export default function ServicesPage() {
                       ))}
                     </ul>
                   </div>
-                  <Button className="w-full mt-6" variant="outline">
+                  <Button className="w-full mt-auto" variant="outline">
                     <Link href="/appointment">Schedule Consultation</Link>
                   </Button>
                 </CardContent>

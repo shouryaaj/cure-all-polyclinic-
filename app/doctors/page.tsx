@@ -1,67 +1,38 @@
-"use client"
+'use client'
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Heart, Star, Calendar, Award, GraduationCap } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
+import doctorsData from "@/lib/data/doctors.json"
+
+interface Doctor {
+  name: string
+  specialty: string
+  image?: string
+  experience: string
+  education: string
+  certifications: string[]
+  languages: string[]
+  bio: string
+}
 
 export default function DoctorsPage() {
-  const [doctors, setDoctors] = useState([])
+  const [doctors, setDoctors] = useState<Doctor[]>([])
 
   useEffect(() => {
-    const fetchDoctors = async () => {
-      try {
-        const response = await fetch("/api/doctors-detailed")
-        const doctorsData = await response.json()
-        setDoctors(doctorsData)
-      } catch (error) {
-        console.error("Error fetching doctors:", error)
-      }
-    }
-    fetchDoctors()
+    setDoctors(doctorsData)
   }, [])
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Navigation */}
-      <nav className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center">
-              <Heart className="h-8 w-8 text-blue-600 mr-2" />
-              <span className="text-xl font-bold text-gray-900">Cure All Polyclinic</span>
-            </Link>
-            <div className="hidden md:flex space-x-8">
-              <Link href="/" className="text-gray-700 hover:text-blue-600">
-                Home
-              </Link>
-              <Link href="/about" className="text-gray-700 hover:text-blue-600">
-                About
-              </Link>
-              <Link href="/services" className="text-gray-700 hover:text-blue-600">
-                Services
-              </Link>
-              <Link href="/doctors" className="text-gray-900 hover:text-blue-600">
-                Doctors
-              </Link>
-              <Link href="/contact" className="text-gray-700 hover:text-blue-600">
-                Contact
-              </Link>
-            </div>
-            <Button className="bg-blue-600 hover:bg-blue-700">
-              <Link href="/appointment">Book Appointment</Link>
-            </Button>
-          </div>
-        </div>
-      </nav>
-
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+      <section className="bg-blue-50 text-black py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">Meet Our Medical Team</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl text-black max-w-3xl mx-auto">
             Our experienced physicians are dedicated to providing exceptional healthcare with compassion, expertise, and
             the latest medical advances.
           </p>
@@ -71,9 +42,9 @@ export default function DoctorsPage() {
       {/* Doctors Grid */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {doctors.map((doctor, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
+              <Card key={index} className="hover:shadow-lg transition-shadow h-full">
                 <CardContent className="p-6">
                   <div className="text-center mb-6">
                     <Image
@@ -81,13 +52,13 @@ export default function DoctorsPage() {
                       alt={doctor.name}
                       width={150}
                       height={150}
-                      className="rounded-full mx-auto mb-4"
+                      className="rounded-full mx-auto mb-4 object-cover"
                     />
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">{doctor.name}</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">{doctor.name}</h3>
                     <p className="text-blue-600 font-semibold mb-2">{doctor.specialty}</p>
-                    <div className="flex items-center justify-center text-yellow-500 mb-2">
+                    <div className="flex justify-center mb-2">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-current" />
+                        <Star key={i} className="h-4 w-4 text-yellow-500 fill-current" />
                       ))}
                     </div>
                   </div>
@@ -95,7 +66,7 @@ export default function DoctorsPage() {
                   <div className="space-y-4">
                     <div className="flex items-center text-sm text-gray-600">
                       <Award className="h-4 w-4 mr-2 text-blue-600" />
-                      <span>{doctor.experience} experience</span>
+                      <span>{doctor.experience}</span>
                     </div>
 
                     <div className="flex items-start text-sm text-gray-600">
@@ -103,17 +74,19 @@ export default function DoctorsPage() {
                       <span>{doctor.education}</span>
                     </div>
 
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">Certifications:</h4>
-                      <ul className="text-sm text-gray-600 space-y-1">
-                        {doctor.certifications.map((cert, idx) => (
-                          <li key={idx} className="flex items-center">
-                            <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                            {cert}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    {doctor.certifications?.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-2">Certifications:</h4>
+                        <ul className="text-sm text-gray-600 space-y-1">
+                          {doctor.certifications.map((cert, idx) => (
+                            <li key={idx} className="flex items-center">
+                              <span className="w-2 h-2 bg-blue-600 rounded-full mr-2" />
+                              {cert}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
                     <div>
                       <h4 className="font-semibold text-gray-900 mb-2">Languages:</h4>
@@ -122,7 +95,7 @@ export default function DoctorsPage() {
 
                     <p className="text-sm text-gray-600 leading-relaxed">{doctor.bio}</p>
 
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                    <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
                       <Calendar className="mr-2 h-4 w-4" />
                       <Link href="/appointment">Book with {doctor.name.split(" ")[1]}</Link>
                     </Button>
@@ -134,7 +107,7 @@ export default function DoctorsPage() {
         </div>
       </section>
 
-      {/* Why Choose Our Doctors */}
+      {/* Why Choose Us */}
       <section className="py-16 bg-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">

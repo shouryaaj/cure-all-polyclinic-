@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Calendar, FileText } from "lucide-react"
@@ -15,21 +14,22 @@ interface Article {
   type: "article"
 }
 
-export default function ArticlesVlogs() {
+export default function ArticlesPage() {
   const [articles, setArticles] = useState<Article[]>([])
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null)
-  const router = useRouter()
 
   useEffect(() => {
-    const sorted = articlesData
+    const sorted = (articlesData as Article[])
       .filter((item) => item.type === "article")
-      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) as Article[]
-    setArticles(sorted.slice(0, 3)) // Top 3
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    setArticles(sorted)
   }, [])
 
   return (
-    <div className="space-y-8">
-      {/* Grid */}
+    <div className="max-w-6xl mx-auto px-4 py-12">
+      <h1 className="text-3xl font-bold mb-8 text-center">Articles & Vlogs</h1>
+
+      {/* Grid of articles */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article) => (
           <Card key={article.id} className="hover:shadow-lg transition-shadow cursor-pointer">
@@ -47,22 +47,13 @@ export default function ArticlesVlogs() {
               <CardTitle className="text-lg">{article.title}</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600 mb-4 line-clamp-3">
-                {article.content.substring(0, 150)}...
-              </p>
+              <p className="text-gray-600 mb-4 line-clamp-3">{article.content.substring(0, 150)}...</p>
               <Button variant="outline" className="w-full" onClick={() => setSelectedArticle(article)}>
                 Read Article
               </Button>
             </CardContent>
           </Card>
         ))}
-      </div>
-
-      {/* View More Articles Button */}
-      <div className="flex justify-center">
-        <Button variant="default" onClick={() => router.push("/articles")}>
-          View More
-        </Button>
       </div>
 
       {/* Modal */}

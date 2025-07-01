@@ -1,0 +1,38 @@
+[
+  {
+    "title": "General Medicine",
+    "description": "Comprehensive primary care for all ages with preventive health screenings.",
+    "icon": "stethoscope",
+    "features": ["Annual Checkups", "Blood Pressure", "General Consultations"]
+  },
+  {
+    "title": "Cardiology",
+    "description": "Advanced heart care with ECG, echocardiography, and cardiac consultations.",
+    "icon": "heart",
+    "features": ["ECG", "Echo", "Heart Monitoring"]
+  },
+  {
+    "title": "Orthopedics",
+    "description": "Bone and joint care including fracture treatment and sports medicine.",
+    "icon": "bone",
+    "features": ["Fracture Care", "Joint Replacement", "Sports Injuries"]
+  },
+  {
+    "title": "Pediatrics",
+    "description": "Specialized healthcare for infants, children, and adolescents.",
+    "icon": "baby",
+    "features": ["Vaccinations", "Growth Monitoring", "Pediatric Consults"]
+  },
+  {
+    "title": "Gynecology",
+    "description": "Women's health services including prenatal care and family planning.",
+    "icon": "users",
+    "features": ["Prenatal Care", "Pap Smear", "Family Planning"]
+  },
+  {
+    "title": "Laboratory Services",
+    "description": "Complete diagnostic testing with quick and accurate results.",
+    "icon": "flask-conical",
+    "features": ["Blood Tests", "Urine Tests", "X-rays"]
+  }
+]

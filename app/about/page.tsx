@@ -1,11 +1,31 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import { useKeenSlider } from "keen-slider/react"
+import "keen-slider/keen-slider.min.css"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Heart, Award, Users, Shield } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import ArticlesVlogs from "@/components/ArticlesVlogs"
+import storyImages from "@/lib/data/storyImages.json"
+
+interface StoryImage {
+  src: string
+  alt: string
+}
 
 export default function AboutPage() {
+  const [sliderRef] = useKeenSlider<HTMLDivElement>({
+    loop: true,
+    slides: {
+      perView: 1,
+      spacing: 16,
+    },
+  })
+
   const values = [
     {
       icon: <Heart className="h-8 w-8 text-red-600" />,
@@ -69,13 +89,19 @@ export default function AboutPage() {
               </div>
             </div>
             <div>
-              <Image
-                src="/placeholder.svg?height=500&width=600"
-                alt="Cure All Polyclinic building exterior"
-                width={600}
-                height={500}
-                className="rounded-lg shadow-lg"
-              />
+              <div ref={sliderRef} className="keen-slider rounded-lg overflow-hidden shadow-lg">
+                {(storyImages as StoryImage[]).map((img, index) => (
+                  <div key={index} className="keen-slider__slide">
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      width={600}
+                      height={400}
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -133,7 +159,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team Leadership */}
+      {/* Leadership Team */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -165,7 +191,7 @@ export default function AboutPage() {
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
                 <CardContent className="p-6">
                   <Image
-                    src={leader.image || "/placeholder.svg"}
+                    src={leader.image}
                     alt={leader.name}
                     width={150}
                     height={150}
