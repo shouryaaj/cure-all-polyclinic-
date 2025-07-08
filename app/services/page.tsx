@@ -12,15 +12,7 @@ import {
   Microscope,
   XCircle
 } from "lucide-react"
-
-import services from "@/lib/data/services.json" // ← 🔥 Direct JSON import
-
-interface Service {
-  title: string
-  description: string
-  icon: string
-  features: string[]
-}
+import { useDataContext } from "@/components/DataContext"
 
 const iconMap: Record<string, JSX.Element> = {
   heart: <Heart className="text-blue-600" />,
@@ -31,6 +23,8 @@ const iconMap: Record<string, JSX.Element> = {
 }
 
 export default function ServicesPage() {
+  const { services } = useDataContext()
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -51,23 +45,18 @@ export default function ServicesPage() {
               <Card key={index} className="hover:shadow-lg transition-shadow h-full flex flex-col justify-between">
                 <CardHeader>
                   <div className="flex items-center mb-4">
-                    <div className="w-8 h-8">{iconMap[service.icon] || <XCircle className="text-red-500" />}</div>
+                    {/* If icon is a URL, show image, else use iconMap */}
+                    {service.icon.startsWith("http") ? (
+                      <img src={service.icon} alt={service.title} className="w-8 h-8" />
+                    ) : (
+                      <div className="w-8 h-8">{iconMap[service.icon] || <XCircle className="text-red-500" />}</div>
+                    )}
                     <CardTitle className="ml-4 text-xl font-semibold">{service.title}</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent className="flex flex-col flex-grow justify-between">
                   <p className="text-gray-600 mb-6">{service.description}</p>
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-gray-900 mb-2">Services Include:</h4>
-                    <ul className="space-y-1">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="text-sm text-gray-600 flex items-center">
-                          <span className="w-2 h-2 bg-blue-600 rounded-full mr-2"></span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  {service.priceOrDuration && <p className="text-xs text-gray-500 mb-2">{service.priceOrDuration}</p>}
                   <Button className="w-full mt-auto" variant="outline">
                     <Link href="/appointment">Schedule Consultation</Link>
                   </Button>

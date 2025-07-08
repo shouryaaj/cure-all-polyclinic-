@@ -2,29 +2,13 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Heart, Star, Calendar, Award, GraduationCap } from "lucide-react"
+import { Calendar } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useState } from "react"
-import doctorsData from "@/lib/data/doctors.json"
-
-interface Doctor {
-  name: string
-  specialty: string
-  image?: string
-  experience: string
-  education: string
-  certifications: string[]
-  languages: string[]
-  bio: string
-}
+import { useDataContext } from "@/components/DataContext"
 
 export default function DoctorsPage() {
-  const [doctors, setDoctors] = useState<Doctor[]>([])
-
-  useEffect(() => {
-    setDoctors(doctorsData)
-  }, [])
+  const { doctors } = useDataContext()
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -48,56 +32,23 @@ export default function DoctorsPage() {
                 <CardContent className="p-6">
                   <div className="text-center mb-6">
                     <Image
-                      src={doctor.image || "/placeholder.svg"}
-                      alt={doctor.name}
+                      src={doctor.profileImage || "/placeholder.svg"}
+                      alt={doctor.fullName}
                       width={150}
                       height={150}
                       className="rounded-full mx-auto mb-4 object-cover"
                     />
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">{doctor.name}</h3>
-                    <p className="text-blue-600 font-semibold mb-2">{doctor.specialty}</p>
-                    <div className="flex justify-center mb-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 text-yellow-500 fill-current" />
-                      ))}
-                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">{doctor.fullName}</h3>
+                    <p className="text-blue-600 font-semibold mb-2">{doctor.specialization}</p>
                   </div>
 
                   <div className="space-y-4">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Award className="h-4 w-4 mr-2 text-blue-600" />
-                      <span>{doctor.experience}</span>
-                    </div>
-
-                    <div className="flex items-start text-sm text-gray-600">
-                      <GraduationCap className="h-4 w-4 mr-2 mt-0.5 text-blue-600" />
-                      <span>{doctor.education}</span>
-                    </div>
-
-                    {doctor.certifications?.length > 0 && (
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-2">Certifications:</h4>
-                        <ul className="text-sm text-gray-600 space-y-1">
-                          {doctor.certifications.map((cert, idx) => (
-                            <li key={idx} className="flex items-center">
-                              <span className="w-2 h-2 bg-blue-600 rounded-full mr-2" />
-                              {cert}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-
-                    <div>
-                      <h4 className="font-semibold text-gray-900 mb-2">Languages:</h4>
-                      <p className="text-sm text-gray-600">{doctor.languages.join(", ")}</p>
-                    </div>
-
+                    <p className="text-xs text-gray-500 mb-1">{doctor.availability}</p>
                     <p className="text-sm text-gray-600 leading-relaxed">{doctor.bio}</p>
 
                     <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
                       <Calendar className="mr-2 h-4 w-4" />
-                      <Link href="/appointment">Book with {doctor.name.split(" ")[1]}</Link>
+                      <Link href="/appointment">Book with {doctor.fullName.split(" ")[0]}</Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -120,7 +71,7 @@ export default function DoctorsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="h-8 w-8 text-white" />
+                <Calendar className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Board Certified</h3>
               <p className="text-gray-600">
@@ -129,7 +80,7 @@ export default function DoctorsPage() {
             </div>
             <div className="text-center">
               <div className="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="h-8 w-8 text-white" />
+                <Calendar className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Patient-Centered Care</h3>
               <p className="text-gray-600">
@@ -138,7 +89,7 @@ export default function DoctorsPage() {
             </div>
             <div className="text-center">
               <div className="bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <GraduationCap className="h-8 w-8 text-white" />
+                <Calendar className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-3">Continuous Learning</h3>
               <p className="text-gray-600">
