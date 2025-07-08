@@ -2,24 +2,29 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import {
-  Heart,
-  Users,
-  Stethoscope,
-  FileText,
-  Plus,
-  Edit,
-  Trash2,
-  LogOut,
-} from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
+import { Heart, Users, Stethoscope, FileText, Plus, Edit, Trash2, LogOut, Briefcase, Smile,} from "lucide-react"
 import { useRouter } from "next/navigation"
 
 export default function AdminDashboard() {
-  const [activeSection, setActiveSection] = useState<"doctors" | "services" | "content">("doctors")
+  const [activeSection, setActiveSection] = useState<
+    | "doctors"
+    | "services"
+    | "content"
+    | "hero"
+    | "whyChooseUs"
+    | "announcements"
+    | "storyImages"
+  >("doctors")
+
   const [doctors, setDoctors] = useState([])
   const [services, setServices] = useState([])
   const [content, setContent] = useState([])
+  const [heroImages, setHeroImages] = useState([])
+  const [whyChooseUs, setWhyChooseUs] = useState([])
+  const [announcements, setAnnouncements] = useState([])
+  const [storyImages, setStoryImages] = useState([])
+
   const router = useRouter()
 
   useEffect(() => {
@@ -45,6 +50,18 @@ export default function AdminDashboard() {
         case "content":
           endpoint = "/api/content"
           break
+        case "hero":
+          endpoint = "/api/hero"
+          break
+        case "whyChooseUs":
+          endpoint = "/api/whyChooseUs"
+          break
+        case "announcements":
+          endpoint = "/api/happenings"
+          break
+        case "storyImages":
+          endpoint = "/api/storyImages"
+          break
       }
 
       const response = await fetch(endpoint)
@@ -59,6 +76,18 @@ export default function AdminDashboard() {
           break
         case "content":
           setContent(data)
+          break
+        case "hero":
+          setHeroImages(data)
+          break
+        case "whyChooseUs":
+          setWhyChooseUs(data)
+          break
+        case "announcements":
+          setAnnouncements(data)
+          break
+        case "storyImages":
+          setStoryImages(data)
           break
       }
     } catch (error) {
@@ -75,7 +104,11 @@ export default function AdminDashboard() {
     if (!confirm("Are you sure you want to delete this item?")) return
 
     try {
-      const endpoint = `/api/${activeSection}/${id}`
+      const endpoint =
+        activeSection === "whyChooseUs"
+          ? `/api/whyChooseUs?id=${id}`
+          : `/api/${activeSection}/${id}`
+
       const response = await fetch(endpoint, { method: "DELETE" })
 
       if (response.ok) {
@@ -89,124 +122,127 @@ export default function AdminDashboard() {
     }
   }
 
-  const renderContent = () => {
-    const data = activeSection === "doctors" ? doctors : activeSection === "services" ? services : content
+  const handleAddNew = () => {
+    console.log(`Open Add ${activeSection} Modal`)
+  }
 
-    return (
-      <div className="space-y-4">
-        {data.map((item: any) => (
-          <Card key={item.id} className="hover:shadow-md transition-shadow">
-            <CardContent className="p-4">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                <div className="flex-1">
-                  <h3 className="font-semibold text-lg mb-2">{item.name || item.title}</h3>
-                  <p className="text-gray-600 text-sm mb-2">
-                    {activeSection === "doctors" && item.specialty}
-                    {activeSection === "services" && item.description}
-                    {activeSection === "content" && (item.description || item.content?.substring(0, 100) + "...")}
+  const data =
+    activeSection === "doctors"
+      ? doctors
+      : activeSection === "services"
+      ? services
+      : activeSection === "content"
+      ? content
+      : activeSection === "hero"
+      ? heroImages
+      : activeSection === "whyChooseUs"
+      ? whyChooseUs
+      : activeSection === "announcements"
+      ? announcements
+      : storyImages
+
+  return (
+    <div className="flex min-h-screen">
+      <aside className="w-60 p-4 border-r bg-gray-50 space-y-2">
+        <Button
+          variant={activeSection === "doctors" ? "default" : "outline"}
+          className="w-full justify-start"
+          onClick={() => setActiveSection("doctors")}
+        >
+          <Stethoscope className="h-4 w-4 mr-2" /> Doctors
+        </Button>
+        <Button
+          variant={activeSection === "services" ? "default" : "outline"}
+          className="w-full justify-start"
+          onClick={() => setActiveSection("services")}
+        >
+          <Briefcase className="h-4 w-4 mr-2" /> Services
+        </Button>
+        <Button
+          variant={activeSection === "content" ? "default" : "outline"}
+          className="w-full justify-start"
+          onClick={() => setActiveSection("content")}
+        >
+          <FileText className="h-4 w-4 mr-2" /> Content
+        </Button>
+        <Button
+          variant={activeSection === "hero" ? "default" : "outline"}
+          className="w-full justify-start"
+          onClick={() => setActiveSection("hero")}
+        >
+          <Users className="h-4 w-4 mr-2" /> Hero Images
+        </Button>
+        <Button
+          variant={activeSection === "whyChooseUs" ? "default" : "outline"}
+          className="w-full justify-start"
+          onClick={() => setActiveSection("whyChooseUs")}
+        >
+          <Smile className="h-4 w-4 mr-2" /> Why Choose Us
+        </Button>
+        <Button
+          variant={activeSection === "announcements" ? "default" : "outline"}
+          className="w-full justify-start"
+          onClick={() => setActiveSection("announcements")}
+        >
+          <FileText className="h-4 w-4 mr-2" /> Announcements
+        </Button>
+        <Button
+          variant={activeSection === "storyImages" ? "default" : "outline"}
+          className="w-full justify-start"
+          onClick={() => setActiveSection("storyImages")}
+        >
+          <Heart className="h-4 w-4 mr-2" /> Our Story Images
+        </Button>
+        <Button variant="destructive" onClick={handleLogout} className="w-full">
+          <LogOut className="h-4 w-4 mr-2" /> Logout
+        </Button>
+      </aside>
+
+      <main className="flex-1 p-6">
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-xl font-semibold capitalize">{activeSection}</h1>
+          <Button onClick={handleAddNew}>
+            <Plus className="h-4 w-4 mr-2" /> Add New
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {data.map((item: any) => (
+            <Card key={item.id}>
+              <CardContent className="p-4">
+                <h3 className="font-semibold text-lg mb-2">
+                  {item.name || item.title || item.fullName || "Untitled"}
+                </h3>
+                {item.imageUrl && (
+                  <img
+                    src={item.imageUrl}
+                    alt={item.name || "Image"}
+                    className="w-full max-w-xs rounded-lg mb-2"
+                  />
+                )}
+                {item.description && <p className="text-sm mb-2">{item.description}</p>}
+                {activeSection === "announcements" && (
+                  <p className="text-xs text-gray-500">
+                    {new Date(item.date).toLocaleDateString()}
                   </p>
-                  {activeSection === "doctors" && (
-                    <p className="text-sm text-gray-500">
-                      {item.experience} • {item.education}
-                    </p>
-                  )}
-                  {activeSection === "content" && (
-                    <p className="text-sm text-gray-500">
-                      {item.type} • {new Date(item.date).toLocaleDateString()}
-                    </p>
-                  )}
-                </div>
-                <div className="flex space-x-2 mt-4 sm:mt-0 sm:ml-4">
+                )}
+                <div className="flex gap-2 mt-2">
                   <Button variant="outline" size="sm">
                     <Edit className="h-4 w-4" />
                   </Button>
                   <Button
-                    variant="outline"
+                    variant="destructive"
                     size="sm"
                     onClick={() => handleDelete(item.id)}
-                    className="text-red-600 hover:text-red-700"
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    )
-  }
-
-  return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-        {/* Header on small screens */}
-        <div className="flex justify-between items-center lg:hidden">
-          <h1 className="text-xl font-bold text-gray-800">Admin Dashboard</h1>
-          <Button variant="outline" size="sm" onClick={handleLogout}>
-            <LogOut className="w-4 h-4 mr-2" />
-            Logout
-          </Button>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <Card>
-              <CardHeader>
-                <CardTitle>Management</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <Button
-                  variant={activeSection === "doctors" ? "default" : "outline"}
-                  className="w-full justify-start"
-                  onClick={() => setActiveSection("doctors")}
-                >
-                  <Users className="h-4 w-4 mr-2" />
-                  Doctors
-                </Button>
-                <Button
-                  variant={activeSection === "services" ? "default" : "outline"}
-                  className="w-full justify-start"
-                  onClick={() => setActiveSection("services")}
-                >
-                  <Stethoscope className="h-4 w-4 mr-2" />
-                  Services
-                </Button>
-                <Button
-                  variant={activeSection === "content" ? "default" : "outline"}
-                  className="w-full justify-start"
-                  onClick={() => setActiveSection("content")}
-                >
-                  <FileText className="h-4 w-4 mr-2" />
-                  Articles & Vlogs
-                </Button>
-                <Button
-                  variant="destructive"
-                  className="w-full justify-start mt-4"
-                  onClick={handleLogout}
-                >
-                  <LogOut className="h-4 w-4 mr-2" />
-                  Logout
-                </Button>
               </CardContent>
             </Card>
-          </div>
-
-          {/* Main Content */}
-          <div className="lg:col-span-3">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-              <h1 className="text-2xl font-bold text-gray-900 capitalize">Manage {activeSection}</h1>
-              <Button className="bg-blue-600 hover:bg-blue-700">
-                <Plus className="h-4 w-4 mr-2" />
-                Add New
-              </Button>
-            </div>
-
-            {renderContent()}
-          </div>
+          ))}
         </div>
-      </div>
+      </main>
     </div>
   )
 }
